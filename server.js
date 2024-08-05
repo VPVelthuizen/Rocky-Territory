@@ -1,11 +1,11 @@
 const express = require('express');
 const db = require('./config/connection');
-const routes = require('./routes');
+const routes = require('./routes/api');
+const { connection } = require('mongoose');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = 3001;
 
-// Connect to the database
 db.connect();
 
 // Set up routes
