@@ -1,18 +1,19 @@
 const express = require('express');
 const db = require('./config/connection');
-const routes = require('./routes/api');
-const { connection } = require('mongoose');
+const thoughtRoutes = require('./routes/thoughtRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 const PORT = 3001;
 
-db.connect();
-
 // Set up routes
 app.use(express.json());
-app.use(routes);
+app.use(userRoutes);
+// app.use(thoughtRoutes);
 
 // Start the server
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+db.once('open', () => {
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
 });

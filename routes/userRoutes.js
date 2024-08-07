@@ -1,9 +1,7 @@
-const User = require('../models/userModel');
-const Thought = require('../models/thoughtModel');
-const { ObjectId } = require('mongoose').types
-const mongoose = require('mongoose');
+const User = require('../models/userModel.js');
+const router = require('express').Router();
 
-app.get('/users', async (req, res) => {
+router.get('/users', async (req, res) => {
     try {
         const users = await User.find();
         res.json(users);
@@ -13,7 +11,7 @@ app.get('/users', async (req, res) => {
 });
 
 // POST a new user
-app.post('/users', async (req, res) => {
+router.post('/users', async (req, res) => {
     try {
         const newUser = new User(req.body);
         const savedUser = await newUser.save();
@@ -24,7 +22,7 @@ app.post('/users', async (req, res) => {
 });
 
 // DELETE a user
-app.delete('/users/:id', async (req, res) => {
+router.delete('/users/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const deletedUser = await User.findByIdAndDelete(id);
@@ -36,3 +34,5 @@ app.delete('/users/:id', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
+module.exports = router;
