@@ -9,7 +9,7 @@ const PORT = 3001;
 // Set up routes
 app.use(express.json());
 app.use(userRoutes);
-// app.use(thoughtRoutes);
+app.use(thoughtRoutes);
 
 // Start the server
 db.once('open', () => {
